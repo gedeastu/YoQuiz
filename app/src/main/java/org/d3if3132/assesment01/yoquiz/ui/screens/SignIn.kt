@@ -29,15 +29,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -66,9 +67,9 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-                Text(text = "Welcome to Quiz Simple", fontWeight = FontWeight.SemiBold)
+                Text(text = stringResource(id = R.string.intro), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
 
-                Text(text = "Masukan Identitas", fontWeight = FontWeight.Normal, style = MaterialTheme.typography.titleLarge)
+                Text(text = stringResource(id = R.string.judul_form), fontWeight = FontWeight.Normal, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -84,24 +85,28 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                     ),
                     singleLine = true,
                     leadingIcon = {
-                        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "name")
+                        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = stringResource(
+                            id = R.string.nama
+                        ),tint = MaterialTheme.colorScheme.primary)
                     },
                     trailingIcon = if (viewModel.name != "") {
                         {
                             IconButton(onClick = {
                                 viewModel.onEmptyName()
                             }) {
-                                Icon(imageVector = Icons.Default.Clear, contentDescription = "clear")
+                                Icon(imageVector = Icons.Default.Clear, contentDescription = stringResource(
+                                    id = R.string.clear
+                                ), tint = MaterialTheme.colorScheme.primary)
                             }
                         }
                     } else null,
                     label = {
-                        Text(text = "Nama")
+                        Text(text = stringResource(id = R.string.nama), color = MaterialTheme.colorScheme.primary)
                     },
                     supportingText = {
                         ErrorHint(viewModel = viewModel,isError = viewModel.namaError)
                     },
-                    isError = viewModel.namaError
+                    isError = viewModel.namaError,
                 )
 
 
@@ -119,19 +124,21 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                     ),
                     singleLine = true,
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Info, contentDescription = "tentang anda")
+                        Icon(imageVector = Icons.Filled.Info, contentDescription = stringResource(id = R.string.tentang_anda), tint = MaterialTheme.colorScheme.primary)
                     },
                     trailingIcon = if (viewModel.tentangAnda != "") {
                         {
                             IconButton(onClick = {
                                 viewModel.onEmptyTentangAnda()
                             }) {
-                                Icon(imageVector = Icons.Default.Clear, contentDescription = "clear")
+                                Icon(imageVector = Icons.Default.Clear, contentDescription = stringResource(
+                                    id = R.string.clear
+                                ), tint = MaterialTheme.colorScheme.primary)
                             }
                         }
                     } else null,
                     label = {
-                        Text(text = "Tentang anda")
+                        Text(text = stringResource(id = R.string.tentang_anda), color = MaterialTheme.colorScheme.primary)
                     },
                     supportingText = {
                         ErrorHint(viewModel = viewModel,isError = viewModel.tentangAndaError)
@@ -150,20 +157,22 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ){
                     ExposedDropdownMenuBox(expanded = viewModel.isExpanded, onExpandedChange = {viewModel.isExpanded = !viewModel.isExpanded}) {
-                        OutlinedTextField(
-                            modifier = Modifier.menuAnchor(),
-                            value = viewModel.selectedChoice,
-                            onValueChange = {
-                                viewModel.selectedChoice = it
-                            },
-                            readOnly = true,
-                            leadingIcon = {
-                                Icon(painter = painterResource(id = viewModel.selectedIcon), contentDescription = viewModel.selectedChoice)
-                            },
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = viewModel.isExpanded)
-                            }
-                        )
+                                                OutlinedTextField(
+                                                    modifier = Modifier.menuAnchor(),
+                                                    value = stringResource(id = viewModel.selectedChoice.toInt()),
+                                                    textStyle = TextStyle(color = MaterialTheme.colorScheme.primary),
+                                                    onValueChange = {
+                                                        viewModel.selectedChoice = it
+                                                    },
+                                                    readOnly = true,
+                                                    leadingIcon = {
+                                                        Icon(painter = painterResource(id = viewModel.selectedIcon), contentDescription = viewModel.selectedChoice, tint = MaterialTheme.colorScheme.primary)
+                                                    },
+                                                    trailingIcon = {
+                                                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = viewModel.isExpanded)
+                                                    }
+                                                )
+
 
 
                         ExposedDropdownMenu(expanded = viewModel.isExpanded, onDismissRequest = {
@@ -172,15 +181,15 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                             viewModel.options.forEachIndexed{ index: Int, value: Gender ->
                                 DropdownMenuItem(
                                     text = {
-                                        Text(text = value.gender)
+                                        Text(text = stringResource(id = value.gender), color = MaterialTheme.colorScheme.primary)
                                     },
                                     onClick = {
-                                        viewModel.selectedChoice = viewModel.options[index].gender
+                                        viewModel.selectedChoice = viewModel.options[index].gender.toString()
                                         viewModel.isExpanded = false
                                         viewModel.selectedIcon = viewModel.iconGender[index]
                                     },
                                     leadingIcon = {
-                                        Icon(painter = painterResource(id = viewModel.iconGender[index]), contentDescription = value.gender)
+                                        Icon(painter = painterResource(id = viewModel.iconGender[index]), contentDescription = value.gender.toString(), tint = MaterialTheme.colorScheme.primary)
                                     },
                                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                                 )
@@ -207,25 +216,29 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                             popUpTo(Screen.SignIn.route){inclusive = true}
                         }
                     }, colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.DarkGray,
-                        contentColor = Color.White
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.surface
                     )
                     ) {
-                        Text(text = "JOIN", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
+                        Text(text = stringResource(id = R.string.join), fontSize = 15.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
                     }
                 }
             }
 
             Spacer(modifier = Modifier.height(35.dp))
-            
-            Switch(checked = viewModel.isDarkTheme.collectAsState().value, onCheckedChange = {
+
+            Switch(modifier = Modifier.padding(10.dp),checked = viewModel.isDarkTheme.collectAsState().value, onCheckedChange = {
                 viewModel.changeTheme()
             },
+                colors = SwitchDefaults.colors(
+                    checkedBorderColor = MaterialTheme.colorScheme.surfaceContainer,
+                    checkedTrackColor = MaterialTheme.colorScheme.surfaceTint
+                ),
                 thumbContent = {
                     if (viewModel.isDarkTheme.collectAsState().value){
                         Icon(painter = painterResource(id = R.drawable.baseline_nightlight_round_24), contentDescription = stringResource(
                             id = R.string.night
-                        ), modifier = Modifier.padding(3.dp))
+                        ), modifier = Modifier.padding(3.dp), )
                     }else{
                         Icon(painter = painterResource(id = R.drawable.baseline_sunny_24), contentDescription = stringResource(
                             id = R.string.day

@@ -21,11 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.d3if3132.assesment01.yoquiz.R
 import org.d3if3132.assesment01.yoquiz.navigation.Screen
 import org.d3if3132.assesment01.yoquiz.ui.components.Answers
 import org.d3if3132.assesment01.yoquiz.viewmodel.QuizViewModel
@@ -43,7 +45,7 @@ fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = { 
-                    Text(text = "Question ${question.id}")
+                    Text(text = stringResource(id = R.string.question, question.id))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
@@ -58,7 +60,9 @@ fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
             .verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 
             Text(text = "${question.id}. " + question.text, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, fontSize = 20.sp)
-            Image(painter = painterResource(id = question.image), contentDescription = "image", modifier = Modifier.size(250.dp))
+            Image(painter = painterResource(id = question.image), contentDescription = stringResource(
+                id = R.string.image
+            ), modifier = Modifier.size(250.dp))
             Spacer(modifier = Modifier.height(5.dp))
 
             Column(modifier = Modifier, horizontalAlignment = Alignment.Start){

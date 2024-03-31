@@ -66,8 +66,8 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
     //Membuat gender list
     val options = listOf(
-        Gender(id = 1, value = R.string.pria, "Pria"),
-        Gender(id = 2, value = R.string.wanita, "Wanita")
+        Gender(id = 1, gender = R.string.pria),
+        Gender(id = 2, gender = R.string.wanita)
     )
 
     //Membuat icon gender list
@@ -80,7 +80,7 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     var isExpanded by mutableStateOf(false)
 
     //Membuat selectedChoice state
-    var selectedChoice by mutableStateOf(options[0].gender)
+    var selectedChoice by mutableStateOf(options[0].gender.toString())
 
     //Membuat selectedIcon state
     var selectedIcon by mutableIntStateOf(iconGender[0])
