@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">YoQuiz</string>
+    <string name="pria">Pria</string>
+    <string name="wanita">Wanita</string>
+    <string name="input_invalid">
+        Tidak Boleh Kosong
+    </string>
+    <string name="night">
+        Dark Theme
+    </string>
+    <string name="day">
+        Light Theme
+    </string>
+</resources>
