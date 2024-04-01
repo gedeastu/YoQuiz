@@ -1,5 +1,7 @@
 package org.d3if3132.assesment01.yoquiz.ui.screens
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,15 +18,19 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.d3if3132.assesment01.yoquiz.R
 import org.d3if3132.assesment01.yoquiz.navigation.Screen
 import org.d3if3132.assesment01.yoquiz.viewmodel.QuizViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
+    val context = LocalContext.current
     //Membuat jumlah benar dan salah jawaban
     val correctCount = viewModel.calculateScore()
     val incorrectCount = viewModel.answersValueSize() - correctCount
@@ -33,7 +39,7 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Result")
+                    Text(text = stringResource(id = R.string.result))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
@@ -51,12 +57,12 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Text("Total Questions : $totalQuestion", style = MaterialTheme.typography.titleMedium, fontSize = 40.sp)
+            Text( text = stringResource(id = R.string.total_questions, totalQuestion), style = MaterialTheme.typography.titleMedium, fontSize = 20.sp)
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Correct: $correctCount", style = MaterialTheme.typography.bodyMedium)
-            Text("Incorrect: $incorrectCount", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(id = R.string.correct, correctCount), style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(id = R.string.incorrect, incorrectCount), style = MaterialTheme.typography.titleMedium)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -66,15 +72,17 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
                     popUpTo(Screen.Result.route){inclusive = true}
                 }
             }) {
-                Text("Restart Quiz")
+                Text(stringResource(id = R.string.restart_quiz))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(onClick = {
-
+                shareData(context = context, message = context.getString(R.string.share_result_template,
+                    totalQuestion, correctCount, incorrectCount
+                    ))
             }) {
-                Text("Share Result")
+                Text(stringResource(id = R.string.share_result))
             }
 
             Button(onClick = {
@@ -82,8 +90,18 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
                     popUpTo(Screen.Result.route){inclusive = true}
                 }
             }) {
-                Text(text = "Finish")
+                Text(text = stringResource(id = R.string.finish))
             }
         }
+    }
+}
+
+private fun shareData(context: Context, message:String){
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
     }
 }

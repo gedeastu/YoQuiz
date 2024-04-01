@@ -13,7 +13,7 @@
     <string name="tentang_anda">Tentang Anda</string>
     <string name="join">MASUK</string>
     <string name="start_quiz">Mulai Quiz</string>
-    <string name="desc_home">Sebuah aplikasi sederhana yang dikembangkan oleh Gede Astu Nugraha bertema Quiz sederhana bertopik tentang programming dan teknologi</string>
+    <string name="desc_home">Sebuah aplikasi sederhana yang dikembangkan oleh Gede Astu Nugraha bertema Quiz sederhana berbahasa Inggris bertopik tentang programming dan teknologi</string>
     <string name="copyright">Copyright © 2024 Gede Astu Nugraha\\nAll rights reserved.</string>
     <string name="about">Tentang</string>
     <string name="sign_out">Keluar</string>
@@ -23,4 +23,18 @@
     <string name="back">Kembali</string>
     <string name="question">Pertanyaan %1$s</string>
     <string name="image">Gambar</string>
+    <string name="result">Hasil</string>
+    <string name="total_questions">Total Soal : %1$s</string>
+    <string name="correct">Benar : %1$s</string>
+    <string name="incorrect">Salah : %1$s</string>
+    <string name="restart_quiz">Mulai Ulang Quiz</string>
+    <string name="share_result">Bagikan Hasil</string>
+    <string name="finish">Selesai</string>
+    <string name="share_result_template">
+        dari YoQuiz
+        Total Soal : %1$s\n
+        Benar : %2$s\n
+        Salah : %3$s\n
+        LAKUKAN YANG TERBAIK DENGAN YoQuiz
+    </string>
 </resources>

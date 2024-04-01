@@ -83,6 +83,7 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                         imeAction = ImeAction.Next,
                         keyboardType = KeyboardType.Text,
                     ),
+                    textStyle = TextStyle(color = MaterialTheme.colorScheme.primary),
                     singleLine = true,
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.AccountCircle, contentDescription = stringResource(
@@ -122,6 +123,7 @@ fun SignIn(navController: NavHostController, viewModel: QuizViewModel) {
                         imeAction = ImeAction.Done,
                         keyboardType = KeyboardType.Text
                     ),
+                    textStyle = TextStyle(color = MaterialTheme.colorScheme.primary),
                     singleLine = true,
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Info, contentDescription = stringResource(id = R.string.tentang_anda), tint = MaterialTheme.colorScheme.primary)
