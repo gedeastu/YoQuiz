@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Info
@@ -62,8 +64,7 @@ fun Home(
     ModalNavigationDrawer(
         drawerContent = {
             ModalDrawerSheet {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
+                Column(modifier = Modifier.fillMaxWidth()
                     .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally){
                     Icon(painter = painterResource(if (selectedChoiceRoute == "Pria" || "Man" == selectedChoiceRoute) R.drawable.baseline_face_24 else R.drawable.baseline_face_4_24), contentDescription = selectedChoiceRoute, modifier = Modifier
                         .height(100.dp)
@@ -109,6 +110,7 @@ fun Home(
         drawerState = drawerState
     ) {
         Scaffold(
+            modifier = Modifier.fillMaxSize(),
             topBar = {
                 MediumTopAppBar(
                     title = {
@@ -157,9 +159,10 @@ fun Home(
                 )
             }
         ){ paddingValues ->
-            Column(modifier = Modifier
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally,modifier = Modifier
+                .fillMaxSize()
                 .padding(paddingValues = paddingValues)
-                .fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+                .verticalScroll(rememberScrollState())){
 
                 Column(
                     verticalArrangement = Arrangement.Center,

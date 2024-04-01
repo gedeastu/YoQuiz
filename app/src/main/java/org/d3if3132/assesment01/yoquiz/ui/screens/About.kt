@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -57,6 +59,7 @@ fun AboutScreen(navController: NavHostController) {
         Column(modifier = Modifier
             .padding(paddingValues = paddingValues)
             .padding(15.dp)
+            .verticalScroll(rememberScrollState())
             .fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
             Image(painter = painterResource(id = R.drawable.light_bulb__2_), contentDescription = stringResource(
                 id = R.string.logo

@@ -48,7 +48,7 @@ fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
                     Text(text = stringResource(id = R.string.question, question.id))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.surface,
                 ),
             )

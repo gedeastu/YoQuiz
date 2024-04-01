@@ -42,7 +42,7 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
                     Text(text = stringResource(id = R.string.result))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.surface,
                 ),
             )
@@ -51,8 +51,7 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
         Column(
             modifier = Modifier
                 .padding(paddingValues = paddingValues)
-                .padding(16.dp)
-                .fillMaxSize(),
+                .padding(16.dp).fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -61,8 +60,8 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(stringResource(id = R.string.correct, correctCount), style = MaterialTheme.typography.titleMedium)
-            Text(stringResource(id = R.string.incorrect, incorrectCount), style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(id = R.string.correct, correctCount), style = MaterialTheme.typography.titleMedium, fontSize = 20.sp)
+            Text(stringResource(id = R.string.incorrect, incorrectCount), style = MaterialTheme.typography.titleMedium, fontSize = 20.sp)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -79,13 +78,14 @@ fun ResultScreen(viewModel: QuizViewModel, navController: NavHostController) {
 
             Button(onClick = {
                 shareData(context = context, message = context.getString(R.string.share_result_template,
-                    totalQuestion, correctCount, incorrectCount
+                    totalQuestion.toString(), correctCount.toString(), incorrectCount.toString()
                     ))
             }) {
                 Text(stringResource(id = R.string.share_result))
             }
 
             Button(onClick = {
+                viewModel.clearAnswers()
                 navController.navigate("${Screen.Home.route}/${viewModel.name}/${viewModel.selectedChoice}/${viewModel.tentangAnda}"){
                     popUpTo(Screen.Result.route){inclusive = true}
                 }
