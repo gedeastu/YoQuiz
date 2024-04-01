@@ -2,48 +2,48 @@
     <string name="app_name">YoQuiz</string>
     <string name="pria">Man</string>
     <string name="wanita">Woman</string>
-    <string name="input_invalid">"         Tidak Boleh Kosong     "</string>
+    <string name="input_invalid">Do not Empty</string>
     <string name="night">
-        Tema Gelap
+        Dark Theme
     </string>
     <string name="day">
-        Tema Cerah
+        Light Theme
     </string>
     <string name="intro">
-        Selamat datang di YoQuiz
+        Welcome to YoQuiz
     </string>
     <string name="judul_form">
-        "Masukan Identitas"
+        Input your Identity
     </string>
     <string name="nama">
-        Nama
+        Name
     </string>
     <string name="clear">
-        Bersihkan
+        Clear
     </string>
     <string name="tentang_anda">
-        Tentang anda
+        About you
     </string>
     <string name="join">
-        MASUK
+        JOIN
     </string>
     <string name="start_quiz">
-        Mulai quiz
+        Start Quiz
     </string>
     <string name="desc_home">
-        Sebuah aplikasi sederhana yang dikembangkan oleh Gede Astu Nugraha bertema Quiz sederhana berbahasa Ingris bertopik tentang programming dan teknologi
+        A simple application developed by Gede Astu Nugraha with the theme of a simple quiz on programming and technology.
     </string>
     <string name="copyright">
        Copyright © 2024 Gede Astu Nugraha\nAll rights reserved.
     </string>
     <string name="about">
-        Tentang
+        About
     </string>
     <string name="sign_out">
-        Keluar
+        Sign Out
     </string>
     <string name="home">
-        Beranda
+        Home
     </string>
     <string name="logo">
         Logo
@@ -52,7 +52,7 @@
         Menu
     </string>
     <string name="back">
-        Kembali
+        Back
     </string>
     <string name="question">
         Question %1$s
