@@ -97,8 +97,6 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
 
     // QUIZ VIEW MODEL
-    var selectedAnswer by mutableStateOf("")
-
 
     // Membuat sebuah state bernilai default 0 bertipe Integer
     private val _currentQuestionIndex = mutableIntStateOf(0)

@@ -18,6 +18,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -35,7 +39,9 @@ import org.d3if3132.assesment01.yoquiz.viewmodel.QuizViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
-
+    var selectedAnswer by remember {
+        mutableStateOf("")
+    }
     val question = viewModel.currentQuestion
     // var showCheck by remember {
     //     mutableStateOf(false)
@@ -68,16 +74,16 @@ fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
             Column(modifier = Modifier, horizontalAlignment = Alignment.Start){
                 question.answers.forEach{(index,answerItem)->
                     Answers(
-                        color = if (viewModel.selectedAnswer == answerItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                        color = if (selectedAnswer == answerItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
                         index = index,
-                        isSelected = viewModel.selectedAnswer == answerItem,
+                        isSelected = selectedAnswer == answerItem,
                         label = answerItem,
-                        textColor = if (viewModel.selectedAnswer == answerItem) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
+                        textColor = if (selectedAnswer == answerItem) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .selectable(
-                                selected = viewModel.selectedAnswer == answerItem,
+                                selected = selectedAnswer == answerItem,
                                 onClick = {
-                                    viewModel.selectedAnswer = answerItem
+                                    selectedAnswer = answerItem
                                 },
                                 role = Role.RadioButton
                             )
@@ -96,20 +102,20 @@ fun QuizScreen(viewModel: QuizViewModel, navController: NavHostController) {
             //}
             
             Button(onClick = {
-                if (viewModel.selectedAnswer.isNotEmpty()){
-                    viewModel.submitAnswer(viewModel.selectedAnswer)
+                if (selectedAnswer.isNotEmpty()){
+                    viewModel.submitAnswer(selectedAnswer)
                     if (viewModel.isLastQuestion()){
                         navController.navigate(Screen.Result.route){
                             popUpTo(Screen.Quiz.route){inclusive = true}
                         }
                     }else{
                         viewModel.nextQuestion()
-                        viewModel.selectedAnswer = ""
+                        selectedAnswer = ""
                     }
                     
                 }
             },
-                enabled = viewModel.selectedAnswer != ""
+                enabled = selectedAnswer != ""
             ) {
                 if (viewModel.isLastQuestion()) Text(text = "Submit") else Text(text = "Next")
             }   
